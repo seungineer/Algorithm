@@ -1,24 +1,18 @@
-n = int(input())
-m = int(input())
-s = input()
+N = int(input())
+M = int(input())
+S = input()
 
-window = 'I' + 'OI'*n
+cursor, count, result = 0, 0, 0
 
-cnt = 0
-i = 0
-k = 0
-
-while i != m:
-    if s[i] == window[k]:
-        k += 1
-        i += 1
+while cursor < (M - 1):
+    if S[cursor:cursor + 3] == 'IOI': #3칸
+        count += 1
+        cursor += 2
+        if count == N:
+            result += 1
+            count -= 1
     else:
-        i = i - k + 1
-        k = 0
-    
-    if k == 2*n+1:
-        cnt += 1
-        i = i - k + 1
-        k = 0
+        cursor += 1
+        count = 0
 
-print(cnt)
+print(result)
