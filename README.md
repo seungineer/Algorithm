@@ -1,5 +1,5 @@
 # Algorithm(Problem Solving)
 
-This is an auto push repository for **Baekjoon Online Judge** created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+This is an auto push repository for **Baekjoon Online Judge** and **Programmers** created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
 
-Also, auto push repository for **LeetHub** created with [LeetHub](https://github.com/QasimWani/LeetHub).
+Also, this is an auto push repository for **LeetCode** created with [LeetHub](https://github.com/QasimWani/LeetHub).
