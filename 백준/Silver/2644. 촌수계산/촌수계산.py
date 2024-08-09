@@ -20,7 +20,6 @@ def dfs(node, length):
         if not vis[k]:
             vis[k] = True
             dfs(k, length+1)
-vis[st] = True
 dfs(st, 0)
 
 print(res)
