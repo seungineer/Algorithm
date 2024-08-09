@@ -3,20 +3,21 @@
  * @return {Function}
  */
 function memoize(fn) {
-    let cache = new Map()
+    let args_map = new Map();
+    
     return function(...args) {
-        let key = JSON.stringify(args);
-        console.log(key);
-        if (cache.has(key)) {
-            return cache.get(key);
+        let args_str = JSON.stringify(args);
+        if (args_map.has(args_str)) {
+            return args_map.get(args_str);
         } else {
-        let answer = fn(...args)
-        cache.set(key, answer)
-        return answer
+            let res = fn(...args);
+            args_map.set(args_str, res);
+            return res;
         }
+        
+        
     }
 }
-
 
 /** 
  * let callCount = 0;
