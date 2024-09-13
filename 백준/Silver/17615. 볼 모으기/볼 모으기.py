@@ -1,18 +1,43 @@
 N = int(input())
 seq = list(map(str, input()))
-cnt_r = 0
-cnt_l = 0
-answer_r = 0 # 우측에서 떨어져 있는 B를 오른편으로
-answer_l = 0 # 우측에서 떨어져 있는 R를 오른편으로
+rev_mov_r = 0
+mov_r = 0
+rev_mov_b = 0
+mov_b = 0
 
-for s in seq:
-    if s == 'B':
-        answer_l += cnt_l
-        cnt_l = 0
-        cnt_r += 1
-    if s == 'R':
-        answer_r += cnt_r
-        cnt_r = 0
-        cnt_l += 1
-        
-print(min(answer_l, answer_r))
+rev_findB = False
+findB = False
+rev_findR = False
+findR = False
+
+for i in range(N-1, -1, -1):
+    rev_s_r = seq[i]
+    s_r = seq[N-1-i]
+
+    if rev_findB:
+        if rev_s_r == 'R':
+            rev_mov_r += 1
+            
+    if rev_findR:
+        if rev_s_r == 'B':
+            rev_mov_b += 1
+    
+    if findB:
+        if s_r == 'R':
+            mov_r += 1
+            
+    if findR:
+        if s_r == 'B':
+            mov_b += 1
+            
+    if rev_s_r == 'R':
+        rev_findR = True
+    else:
+        rev_findB = True
+    
+    if s_r == 'R':
+        findR = True
+    else:
+        findB = True
+
+print(min(rev_mov_r, rev_mov_b, mov_r, mov_b))
