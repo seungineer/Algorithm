@@ -1,4 +1,3 @@
-from collections import deque
 T = int(input())
 for _ in range(T):
     W = input()
@@ -15,12 +14,11 @@ for _ in range(T):
             if len(dict[s]) == K-1:
                 shortest = min(shortest, i - dict[s][0][0] + 1)
                 longest = max(longest, i - dict[s][0][0] + 1)
-                dict[s].popleft()    
+                dict[s].pop(0)    
             dict[s].append([i, len(dict[s])+1])
         else:
-            dict[s] = deque()
-            dict[s].append([i, 1])
-
+            dict[s] = [[i, 1]]
+            
 
     if shortest != float("inf") and longest != -float("inf"):
         print(shortest, longest)
