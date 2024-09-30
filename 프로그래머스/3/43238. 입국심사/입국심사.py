@@ -1,7 +1,7 @@
 def solution(n, times):
+    answer = 1e9
     l = 1
     r = max(times) * n
-    answer = r
     while l <= r:
         mid = (l+r)//2
         people_cnt = 0
