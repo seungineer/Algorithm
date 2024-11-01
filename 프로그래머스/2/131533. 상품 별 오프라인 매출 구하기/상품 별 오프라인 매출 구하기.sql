@@ -1,7 +1,6 @@
-select P.product_code, A.total_amount * P.price as sales
-from PRODUCT as P
-join  (select PRODUCT_ID, SUM(sales_amount) as total_amount
-       from OFFLINE_SALE
-       group by PRODUCT_ID) as A
-on P.PRODUCT_ID = A.PRODUCT_ID
+select P.PRODUCT_CODE, SUM(S.SALES_AMOUNT * P.PRICE) as SALES
+from OFFLINE_SALE as S
+left join PRODUCT as P
+on S.PRODUCT_ID = P.PRODUCT_ID
+group by P.PRODUCT_CODE
 order by 2 desc, 1 asc
