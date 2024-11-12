@@ -14,13 +14,12 @@ M = int(input())
 lst_b = list(map(int, input().split()))
 
 def find(acc, idx, lst, part_sum):
+    if idx == len(lst): return
     acc += lst[idx]
     if acc in part_sum.keys(): part_sum[acc] += 1
     else: part_sum[acc] = 1
 
-    for j in range(idx+1, len(lst)):
-        find(acc, j, lst, part_sum)
-        break
+    find(acc, idx+1, lst, part_sum)
 
 part_sum_a = dict()
 for i in range(N):
