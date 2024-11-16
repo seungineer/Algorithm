@@ -1,0 +1,8 @@
+a_str = input()
+b_str = input()
+c_str = input()
+a_int = int(a_str)
+b_int = int(b_str)
+c_int = int(c_str)
+print(a_int + b_int - c_int)
+print(int(a_str + b_str) - c_int)
