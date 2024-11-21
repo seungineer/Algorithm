@@ -4,7 +4,7 @@ info = []
 for _ in range(M):
     st, en, w = map(int, input().split())
     info.append([en-st-1, -w, st])
-
+info.sort()
 boxCount = [C for _ in range(N+1)]
 answer = 0
 while info:
