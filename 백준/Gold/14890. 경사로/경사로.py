@@ -35,7 +35,7 @@ def solution():
         for j in range(N-1):
             # i,j보다 1 크, 작, 같 또는 1보다 큰 차이
             if not canGo: break
-            if j > 0 and row_vis[i][j-1] != 0: row_vis[i][j] = row_vis[i][j-1] - 1
+            if j+1 < N and row_vis[i][j] != 0: row_vis[i][j+1] = row_vis[i][j] - 1
             
             if abs(matrix[i][j] - matrix[i][j+1]) > 1: canGo = False
             
