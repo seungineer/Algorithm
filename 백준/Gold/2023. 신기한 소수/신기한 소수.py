@@ -14,7 +14,6 @@ def bt(number):
         return
     
     for i in range(1, 10):
-        if i % 2 == 0: continue
         
         next_cand = number * 10 + i
         if isPrime(next_cand):
