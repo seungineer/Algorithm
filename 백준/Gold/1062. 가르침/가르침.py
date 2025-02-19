@@ -1,49 +1,53 @@
-N, K = map(int, input().split())
-words = [input() for _ in range(N)]
-selected = set()
-for alphabet in 'anta': selected.add(alphabet)
-for alphabet in 'tica': selected.add(alphabet)
-
-unicode_start = ord('a')
-unicode_end = ord('z')
-if K < len(selected):
-    print(0)
-    exit()
-K -= len(selected)
-unicodes = list(range(unicode_start, unicode_end + 1))
-
-for el in list(selected):
-    unicodes.remove(ord(el))
-max_words = [-1]
-
-
-def count():
-    not_cnt = 0
-    for word in words:
-        for w in word:
-            if not w in selected:
-                not_cnt += 1
-                break
-    max_words[0] = max(max_words[0], len(words) - not_cnt)
-if K == 0:
-    count()
-    print(max_words[0])
-    exit()
-
-def dfs(index, left):
-    if left == 0:
-        count()
-        return
+def solution():
+    N, K = map(int, input().rstrip().split())
+    seq = [input().rstrip() for _ in range(N)]
     
-    for k in range(index + 1, len(unicodes)):
-        selected.add(chr(unicodes[k]))
-        dfs(k, left - 1)
-        selected.discard(chr(unicodes[k]))
-
-for i in range(len(unicodes)):
-    if chr(unicodes[i]) in selected: continue
-    selected.add(chr(unicodes[i]))
-    dfs(i, K - 1)
-    selected.discard(chr(unicodes[i]))
-
-print(max_words[0])
+    baseWords = ['anta', 'tica']
+    base = 0b0
+    for word in baseWords:
+        for el in word:
+            num = ord(el) - 97
+            base = base | (0b1 << num)
+    
+    def bt(currBit, prev, left):
+        if left == 0:
+            # words 중 몇 개 가능?
+            cnt = 0
+            for word in seq:
+                isFind = True
+                for el in word:
+                    num = ord(el) - 97
+                    if not currBit & (0b1 << num):
+                        isFind = False
+                if isFind:
+                    cnt += 1
+            maxCnt[0] = max(maxCnt[0], cnt)
+            return
+        for word in range(prev+1, 26):
+            if (0b1 << word) & currBit: continue
+            currBit = currBit | (0b1 << word)
+            bt(currBit, word, left-1)
+            currBit = currBit & ~(0b1 << word)
+    
+    maxCnt = [0]
+    K -= 5
+    if K == 0:
+        cnt = 0
+        for word in seq:
+            isFind = True
+            for el in word:
+                num = ord(el) - 97
+                if not base & (0b1 << num):
+                    isFind = False
+            if isFind:
+                cnt += 1
+        maxCnt[0] = max(maxCnt[0], cnt)
+    else:
+        for word in range(26):
+            if (0b1 << word) & base: continue
+            base = base | (0b1 << word)
+            bt(base, word, K-1)
+            base = base & ~(0b1 << word)
+    print(maxCnt[0])
+    return
+solution()
