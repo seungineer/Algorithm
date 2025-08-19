@@ -1,4 +1,4 @@
-select MEMBER_ID, MEMBER_NAME, GENDER, DATE_FORMAT(DATE_OF_BIRTH, '%Y-%m-%d') as DATE_OF_BIRTH
-from MEMBER_PROFILE
-where not ISNULL(TLNO) and MONTH(DATE_OF_BIRTH) like '3' and GENDER like 'W'
-order by 1
+select member_id, member_name, gender, date_format(date_of_birth, '%Y-%m-%d') as date_of_birth
+from member_profile
+where not isnull(tlno) and date_format(date_of_birth, '%m') like '03' and gender like 'W'
+order by member_id
