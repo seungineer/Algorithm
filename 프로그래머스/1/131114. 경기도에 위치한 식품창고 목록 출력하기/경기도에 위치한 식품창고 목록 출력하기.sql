@@ -1,6 +1,4 @@
-select W.WAREHOUSE_ID, W.WAREHOUSE_NAME, W.ADDRESS, case when ISNULL(W.FREEZER_YN) then 'N'
-                                                        else W.FREEZER_YN
-                                                        end as FREEZER_YN
-from FOOD_WAREHOUSE as W
-where W.ADDRESS like '경기도%'
+select warehouse_id, warehouse_name, address, if(isnull(freezer_yn), 'N', freezer_yn) as freezer_yn
+from food_warehouse
+where address like '경기도%'
 order by 1 asc
