@@ -1,6 +1,6 @@
-select I.ANIMAL_ID, I.NAME
-from ANIMAL_INS as I
-join ANIMAL_OUTS as O
-on I.ANIMAL_ID = O.ANIMAL_ID
-where I.DATETIME > O.DATETIME
-order by I.DATETIME
+select i.animal_id, i.name
+from animal_ins as i
+inner join animal_outs as o
+on i.animal_id = o.animal_id
+where i.datetime > o.datetime
+order by i.datetime
