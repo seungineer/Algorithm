@@ -1,6 +1,9 @@
-select O.ANIMAL_ID, O.NAME
-from ANIMAL_OUTS as O
-left join ANIMAL_INS as I
-on O.ANIMAL_ID = I.ANIMAL_ID
-where I.ANIMAL_ID IS NULL
-order by 1 asc
+select animal_id, name
+from (
+    select o.animal_id, o.name, i.intake_condition
+    from animal_outs as o
+    left outer join
+    animal_ins as i
+    on o.animal_id = i.animal_id) as t
+where t.intake_condition is null
+order by 1, 2
