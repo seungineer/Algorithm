@@ -1,6 +1,7 @@
-select I.ANIMAL_ID, I.ANIMAL_TYPE, I.NAME
-from ANIMAL_INS as I
-join ANIMAL_OUTS as O
-on I.ANIMAL_ID = O.ANIMAL_ID
-where I.SEX_UPON_INTAKE LIKE 'Intact%' and (O.SEX_UPON_OUTCOME LIKE 'Spayed%' or O.SEX_UPON_OUTCOME LIKE 'Neutered%')
-order by 1 asc
+select i.animal_id, i.animal_type, i.name
+from animal_ins as i
+inner join animal_outs as o
+on i.animal_id = o.animal_id
+where i.sex_upon_intake like'Intact%' and 
+    (o.sex_upon_outcome like 'Spayed%' or o.sex_upon_outcome like 'Neutered%')
+order by 1
