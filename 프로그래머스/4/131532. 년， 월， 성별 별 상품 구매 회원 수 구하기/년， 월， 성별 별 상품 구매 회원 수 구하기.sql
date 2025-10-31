@@ -1,9 +1,11 @@
-select YEAR(O.SALES_DATE) as YEAR, MONTH(O.SALES_DATE) as MONTH, S.GENDER as GENDER, count(distinct S.USER_ID) as USERS
-from ONLINE_SALE as O
-inner join (
-    select *
-    from USER_INFO as UI
-    where NOT ISNULL(UI.GENDER)) as S
-on S.USER_ID = O.USER_ID
-group by YEAR, MONTH, GENDER
-order by 1, 2, 3 asc
+select s.year, s.month, i.gender, count(distinct(i.user_id)) as users
+from (
+    select *, year(sales_date) as year, month(sales_date) as month
+from online_sale
+) as s
+inner join
+(select * from user_info where gender is not null) as i
+on s.user_id = i.user_id
+where i.gender is not null
+group by s.year, s.month, i.gender
+order by 1, 2, 3
