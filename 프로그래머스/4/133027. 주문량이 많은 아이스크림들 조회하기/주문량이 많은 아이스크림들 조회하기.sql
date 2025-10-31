@@ -1,11 +1,10 @@
-select H.FLAVOR
-from (select *, sum(total_order) as total_half
-      from FIRST_HALF
-      group by FLAVOR) as H
-join
-      (select *, sum(total_order) as total_july
-       from JULY
-       group by FLAVOR) as J
-on H.FLAVOR = J.FLAVOR
-order by J.total_july + H.total_half desc
+select f.flavor
+from (
+    select flavor, sum(total_order) as tot
+    from july
+    group by flavor
+) as f
+inner join first_half as h
+on f.flavor = h.flavor
+order by f.tot + h.total_order desc
 limit 3
